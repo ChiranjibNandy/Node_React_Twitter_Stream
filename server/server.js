@@ -1,20 +1,25 @@
 const http = require('http')
 const express = require('express')
 const socketIO = require('socket.io')
+require('dotenv').config();
 
 let app = express()
 let server = http.createServer(app)
 let io = socketIO(server)
 
+
+
 app.use(express.json())
 
 let Twit = require('twit')
 
+console.log(process.env);
+
 let T = new Twit({
-  consumer_key: '',
-  consumer_secret: '',
-  access_token: '',
-  access_token_secret: ''
+  consumer_key: process.env.TWITTER_CONSUMER_KEY,
+  consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+  access_token: process.env.TWITTER_ACCESS_TOKEN_KEY,
+  access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 })
 
 let twitterStream
